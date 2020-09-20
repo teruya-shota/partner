@@ -1,0 +1,31 @@
+<div class ="col-sm-11">
+
+  <h5 class="offset-sm-2"><span>プログラミング言語編集</span></h5>
+
+  <%= form_for @language, url: admin_language_path do |f| %>
+
+  <div class="er">
+  <% if @language.errors.any? %>
+    <h3><%= @language.errors.count %>error occurrence</h3>
+    <ul>
+  		<% @language.errors.full_messages.each do |message| %>
+  		<li><%= message %></li>
+  		<% end %>
+  	</ul>
+  <% end %>
+  </div>
+
+  <form>
+    <div class="form-group form-inline">
+    	<font style="font-size:small">
+      	<strong>
+		      <%= f.label :言語名 %>
+		    </strong>
+		  </font>
+		  <%= f.text_field :area, class: "form-control ml-3" %>
+  		<%= f.submit "変更を保存する", class: "btn btn-primary" %>
+    </div>
+
+  </form>
+  <% end %>
+</div>

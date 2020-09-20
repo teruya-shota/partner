@@ -10,13 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_14_062511) do
+ActiveRecord::Schema.define(version: 2020_09_20_024615) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.text "message", null: false
+    t.integer "user_id"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_chats_on_room_id"
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "area", null: false
+    t.text "usage", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "detail", null: false
+    t.integer "room_id"
+    t.integer "language_id"
+    t.integer "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_plans_on_genre_id"
+    t.index ["language_id"], name: "index_plans_on_language_id"
+    t.index ["room_id"], name: "index_plans_on_room_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "plan_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_rooms_on_plan_id"
   end
 
   create_table "users", force: :cascade do |t|
