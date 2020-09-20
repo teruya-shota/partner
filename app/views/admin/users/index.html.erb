@@ -1,0 +1,25 @@
+    <h5><span>会員一覧</span></h5>
+
+    <table class="table">
+      <thead>
+        <tr class="table-info">
+          <th>会員ID</th>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr class="table-light">
+          <td><%= user.id %></td>s
+          <td><%= link_to user.name, admin_user_path(user) %></td>
+          <td><%= user.email %></td>
+          <td><%= status(user.is_valid) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="offset-sm-5">
+      <%= paginate @users %>
+    </div>
