@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
 
   #デバイス
-  devise_for :users
+  devise_for :users, skip: :all
+  devise_scope :user do
+    get '/users/sign_in', to: 'users/sessions#new'
+    post '/users/sign_in', to: 'users/sessions#create'
+    delete '/users/sign_out', to: 'users/sessions#destroy'
+    get '/users/sign_up', to: 'users/registrations#new'
+    post '/users', to: 'users/registrations#create'
+    get '/password/edit', to: 'users/registrations#edit'
+    get '/password/update', to: 'users/registrations#update'
   end
   #ルート設定
-  root "products#top"
+  root 'users#show'
   #顧客
   resource :users, only: [:show,:edit,:update] do
     get :leave, on: :collection

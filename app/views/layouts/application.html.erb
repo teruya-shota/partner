@@ -10,6 +10,59 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container-fluid">
+      <div class="containar">
+      <!-- ヘッダー -->
+        <header class="navbar navbar-fixed-top">
+          <nav>
+            <ul class="nav navbar  navbar-light">
+              <!--if文でサインインとアウト時の表示を変更-->
+              <% if user_signed_in? %>
+              <li class="pr-5">
+                <span>ようこそ、<%= current_user.name %>さん!</span>
+              </li>
+              <li class="nav-item">
+                <%= link_to ' マイページ ', users_path, class: 'btn btn-info' %>
+              </li>
+              <li class="nav-item pl-4">
+                <%= button_to ' ログアウト ', users_sign_out_path , class: 'btn btn-info', method: :delete %>
+              </li>
+
+              <% elsif current_admin %>
+              <li class="nav-item pl-4">
+                <%= link_to ' 会員一覧 ', admin_users_path, class: 'btn btn-info' %>
+              </li>
+              <li class="nav-item pl-4">
+                <%= button_to ' ログアウト ', admin_sign_out_path , class: 'btn btn-info', method: :delete %>
+              </li><br>
+
+              <% else %>
+
+              <li class="nav-item pl-4">
+                <%= link_to ' ログイン ', users_sign_in_path, class: 'btn btn-info' %>
+              </li>
+              <li class="nav-item pl-4">
+                <%= link_to ' 新規登録 ', users_sign_up_path, class: 'btn btn-info' %>
+              </li>
+              <% end %>
+            </ul>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="container main">
+        <%= yield %>
+      </div>
+    </div>
+    <!-- フッター -->
+    <% unless current_admin %>
+      <div class="container-fluid">
+        <!-- <div class="container"> -->
+          <footer class="navbar navbar-fixed-top"></footer>
+        <!-- </div> -->
+      </div>
+    <% end %>
   </body>
 </html>
