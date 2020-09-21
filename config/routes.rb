@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   #デバイス
   devise_for :users
-  end
   #ルート設定
   root "products#top"
   #顧客
