@@ -71,3 +71,7 @@ gem 'hirb'
 gem 'hirb-unicode'
 gem 'rails-i18n'
 gem 'dotenv-rails'
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
